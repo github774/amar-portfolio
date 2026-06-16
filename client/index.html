@@ -10,6 +10,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js"></script>
+    <script>
+      // Initialize Unicorn Studio as soon as the DOM is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.UnicornStudio && !window.UnicornStudio.isInitialized) {
+          UnicornStudio.init();
+          window.UnicornStudio.isInitialized = true;
+        }
+      });
+    </script>
   </head>
 
   <body>

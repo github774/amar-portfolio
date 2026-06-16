@@ -136,7 +136,7 @@ const ParticleTextEffect: React.FC<ParticleTextEffectProps> = ({
   const dottify = () => {
     const ctx = ctxRef.current;
     const canvas = canvasRef.current;
-    if (!ctx || !canvas || !textBox.x || !textBox.y || !textBox.w || !textBox.h) return;
+    if (!ctx || !canvas || textBox.x === undefined || textBox.y === undefined || !textBox.w || !textBox.h) return;
 
     const data = ctx.getImageData(textBox.x, textBox.y, textBox.w, textBox.h).data;
     const pixels: { x: number; y: number; rgb: number[] }[] = [];
@@ -181,11 +181,11 @@ const ParticleTextEffect: React.FC<ParticleTextEffectProps> = ({
     interactionRadiusRef.current = Math.max(70, textBox.h * 0.8);
 
     ctx.font = `900 ${textBox.h}px Inter, System-UI, sans-serif`;
-    ctx.textAlign = 'center';
+    ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
 
     textBox.w = Math.round(ctx.measureText(textBox.str).width);
-    textBox.x = 0.5 * (canvas.width - textBox.w);
+    textBox.x = 0;
     textBox.y = 0.5 * (canvas.height - textBox.h);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -195,7 +195,7 @@ const ParticleTextEffect: React.FC<ParticleTextEffectProps> = ({
     colors.forEach((c, i) => gradient.addColorStop(i / N, `#${c}`));
     ctx.fillStyle = gradient;
 
-    ctx.fillText(textBox.str, 0.5 * canvas.width, 0.5 * canvas.height);
+    ctx.fillText(textBox.str, textBox.x, 0.5 * canvas.height);
     dottify();
   };
 
