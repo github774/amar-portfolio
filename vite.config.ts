@@ -4,7 +4,13 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
-import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
+// Manus runtime plugin — optional, only available in local dev
+let vitePluginManusRuntime: (() => Plugin) | undefined;
+try {
+  vitePluginManusRuntime = (await import("vite-plugin-manus-runtime")).vitePluginManusRuntime;
+} catch {
+  // Not available in production builds (e.g. Vercel)
+}
 
 // =============================================================================
 // Manus Debug Collector - Vite Plugin
@@ -203,7 +209,13 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+const isDev = process.env.NODE_ENV !== 'production';
+const plugins: Plugin[] = [react(), tailwindcss(), jsxLocPlugin()];
+if (isDev) {
+  if (vitePluginManusRuntime) plugins.push(vitePluginManusRuntime());
+  plugins.push(vitePluginManusDebugCollector());
+  plugins.push(vitePluginStorageProxy());
+}
 
 export default defineConfig({
   plugins,
