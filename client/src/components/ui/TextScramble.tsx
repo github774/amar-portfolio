@@ -65,22 +65,22 @@ export function TextScramble({ text, className = "" }: TextScrambleProps) {
 
   return (
     <div
-      className={`group relative inline-flex flex-col cursor-pointer select-none ${className}`}
+      className={`group relative inline-flex flex-col whitespace-nowrap shrink-0 cursor-pointer select-none ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <span className="relative font-mono tracking-widest uppercase">
+      <span className="relative font-mono tracking-widest uppercase whitespace-nowrap flex flex-row">
         {displayText.split("").map((char, i) => (
           <span
             key={i}
-            className={`inline-block transition-all duration-150 ${
+            className={`inline-block whitespace-nowrap transition-all duration-150 ${
               isScrambling && char !== text[i] ? "text-white scale-110" : "text-foreground"
             }`}
             style={{
               transitionDelay: `${i * 10}ms`,
             }}
           >
-            {char}
+            {char === " " ? "\u00A0" : char}
           </span>
         ))}
       </span>

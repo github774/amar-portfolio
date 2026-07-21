@@ -141,8 +141,10 @@ const ParticleTextEffect: React.FC<ParticleTextEffectProps> = ({
     const data = ctx.getImageData(textBox.x, textBox.y, textBox.w, textBox.h).data;
     const pixels: { x: number; y: number; rgb: number[] }[] = [];
 
-    for (let y = 0; y < textBox.h; y += particleDensity) {
-      for (let x = 0; x < textBox.w; x += particleDensity) {
+    const effectiveDensity = typeof window !== 'undefined' && window.innerWidth < 768 ? Math.max(particleDensity, 5) : particleDensity;
+
+    for (let y = 0; y < textBox.h; y += effectiveDensity) {
+      for (let x = 0; x < textBox.w; x += effectiveDensity) {
         const idx = (y * textBox.w + x) * 4;
         const alpha = data[idx + 3];
         if (alpha > 128) {
@@ -199,13 +201,29 @@ const ParticleTextEffect: React.FC<ParticleTextEffectProps> = ({
     dottify();
   };
 
+  const activeParticlesRef = useRef<boolean>(true);
+
   const animate = () => {
     const ctx = ctxRef.current;
     const canvas = canvasRef.current;
     if (!ctx || !canvas) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particlesRef.current.forEach(p => p.move(interactionRadiusRef.current, hasPointerRef.current));
+    // Only redraw when particles are active or pointer is present
+    if (activeParticlesRef.current || hasPointerRef.current) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let anyMoved = false;
+      const particles = particlesRef.current;
+      const radius = interactionRadiusRef.current;
+      const hasPointer = hasPointerRef.current;
+
+      for (let i = 0; i < particles.length; i++) {
+        if (particles[i].move(radius, hasPointer)) {
+          anyMoved = true;
+        }
+      }
+      activeParticlesRef.current = anyMoved;
+    }
+
     animationIdRef.current = requestAnimationFrame(animate);
   };
 

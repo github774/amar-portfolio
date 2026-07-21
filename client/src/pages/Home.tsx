@@ -677,15 +677,31 @@ const WORK_ITEMS = [
 
 const FILTERS = ["All", "AI/ML", "Simulation", "Tools", "Games & Hardware", "Infra", "Hackathons"];
 
-// Custom Spline Background Component — deferred mount for performance
+// Custom Spline Background Component — deferred mount for performance (desktop only for 60FPS mobile speed)
 function HeroSplineBackground() {
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Defer Spline load by 2s so the rest of the page is interactive first
-    const timer = setTimeout(() => setShouldLoad(true), 2000);
-    return () => clearTimeout(timer);
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      return mobile;
+    };
+    
+    if (!checkMobile()) {
+      const timer = setTimeout(() => setShouldLoad(true), 1200);
+      return () => clearTimeout(timer);
+    }
   }, []);
+
+  if (isMobile) {
+    return (
+      <div className="relative w-full h-screen overflow-hidden bg-[#09090b]">
+        <div className="absolute inset-0 animated-grid opacity-30 pointer-events-none" />
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-screen overflow-hidden pointer-events-auto">
@@ -1209,18 +1225,17 @@ export default function Home() {
 
   // Unicorn Studio loads eagerly (no lazy gate)
 
-  // Unicorn Studio branding cleanup + re-init if needed
+  // Unicorn Studio branding cleanup via static CSS rules (no heavy JS DOM polling)
   useEffect(() => {
     // Re-initialize Unicorn Studio in case the embed element wasn't in the DOM at page load
     if ((window as any).UnicornStudio && !(window as any).UnicornStudio.isInitialized) {
       (window as any).UnicornStudio.init();
       (window as any).UnicornStudio.isInitialized = true;
     } else if ((window as any).UnicornStudio) {
-      // If already initialized but the embed was added later by React, re-init
       (window as any).UnicornStudio.init();
     }
 
-    // Dynamic brand hiding stylesheet
+    // Dynamic brand hiding stylesheet — zero JS interval overhead
     const style = document.createElement('style');
     style.textContent = `
       [data-us-project] {
@@ -1233,87 +1248,27 @@ export default function Home() {
       [data-us-project] * {
         pointer-events: none !important;
       }
-      [data-us-project] a[href*="unicorn"],
-      [data-us-project] button[title*="unicorn"],
-      [data-us-project] div[title*="Made with"],
+      [data-us-project] a,
+      [data-us-project] button,
+      [data-us-project] div[title*="Made"],
       [data-us-project] .unicorn-brand,
       [data-us-project] [class*="brand"],
       [data-us-project] [class*="credit"],
-      [data-us-project] [class*="watermark"] {
+      [data-us-project] [class*="watermark"],
+      spline-viewer::shadow #logo,
+      spline-viewer::shadow a {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
+        pointer-events: none !important;
         position: absolute !important;
         left: -9999px !important;
         top: -9999px !important;
       }
     `;
     document.head.appendChild(style);
-
-    const hideBranding = () => {
-      const selectors = [
-        '[data-us-project]',
-        '[data-us-project="OMzqyUv6M3kSnv0JeAtC"]',
-        '.unicorn-studio-container',
-        'canvas[aria-label*="Unicorn"]'
-      ];
-      
-      selectors.forEach(selector => {
-        const containers = document.querySelectorAll(selector);
-        containers.forEach(container => {
-          const allElements = container.querySelectorAll('*');
-          allElements.forEach(el => {
-            const text = (el.textContent || '').toLowerCase();
-            const title = (el.getAttribute('title') || '').toLowerCase();
-            const href = (el.getAttribute('href') || '').toLowerCase();
-            
-            if (
-              text.includes('made with') || 
-              text.includes('unicorn') ||
-              title.includes('made with') ||
-              title.includes('unicorn') ||
-              href.includes('unicorn.studio')
-            ) {
-              (el as HTMLElement).style.display = 'none';
-              (el as HTMLElement).style.visibility = 'hidden';
-              (el as HTMLElement).style.opacity = '0';
-              (el as HTMLElement).style.pointerEvents = 'none';
-              (el as HTMLElement).style.position = 'absolute';
-              (el as HTMLElement).style.left = '-9999px';
-              (el as HTMLElement).style.top = '-9999px';
-              try { el.remove(); } catch(e) {}
-            }
-          });
-        });
-      });
-
-      // Spline Watermark Shadow DOM hiding
-      const splineViewers = document.querySelectorAll('spline-viewer');
-      splineViewers.forEach(viewer => {
-        if (viewer.shadowRoot) {
-          const logo = viewer.shadowRoot.getElementById('logo');
-          if (logo) {
-            (logo as HTMLElement).style.display = 'none';
-            (logo as HTMLElement).style.visibility = 'hidden';
-            (logo as HTMLElement).style.opacity = '0';
-            (logo as HTMLElement).style.pointerEvents = 'none';
-          }
-          const shadowLinks = viewer.shadowRoot.querySelectorAll('a[href*="spline"]');
-          shadowLinks.forEach(link => {
-            (link as HTMLElement).style.display = 'none';
-            (link as HTMLElement).style.visibility = 'hidden';
-            (link as HTMLElement).style.opacity = '0';
-            (link as HTMLElement).style.pointerEvents = 'none';
-          });
-        }
-      });
-    };
-
-    hideBranding();
-    const interval = setInterval(hideBranding, 2000);
     
     return () => {
-      clearInterval(interval);
       try { document.head.removeChild(style); } catch(e) {}
     };
   }, []);
@@ -1385,18 +1340,18 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Centered Floating Pill Navigation */}
-      <nav className="fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 bg-[#121214]/80 backdrop-blur-md border border-neutral-800/60 rounded-full px-4 sm:px-6 py-2 flex items-center gap-4 sm:gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.5)] max-w-[94vw] justify-between">
-        <a href="#" className="font-serif font-bold text-base sm:text-lg text-white hover:opacity-85 transition-opacity shrink-0">
+      <nav className="fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 bg-[#121214]/90 backdrop-blur-md border border-neutral-800/80 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 flex flex-row items-center justify-between gap-4 sm:gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.6)] whitespace-nowrap shrink-0 max-w-[92vw] sm:max-w-none w-auto select-none">
+        <a href="#" className="font-serif font-bold text-sm sm:text-base text-white hover:opacity-85 transition-opacity shrink-0 whitespace-nowrap">
           Amar
         </a>
-        <div className="flex items-center gap-3 sm:gap-6">
-          <a href="#work" className="text-xs sm:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
+        <div className="flex flex-row items-center gap-3 sm:gap-6 shrink-0 whitespace-nowrap">
+          <a href="#work" className="text-[11px] sm:text-xs font-mono text-zinc-400 hover:text-white transition-colors shrink-0 whitespace-nowrap">
             <TextScramble text="work" />
           </a>
-          <a href="#about" className="text-xs sm:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
+          <a href="#about" className="text-[11px] sm:text-xs font-mono text-zinc-400 hover:text-white transition-colors shrink-0 whitespace-nowrap">
             <TextScramble text="about" />
           </a>
-          <a href="#contact" className="text-xs sm:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
+          <a href="#contact" className="text-[11px] sm:text-xs font-mono text-zinc-400 hover:text-white transition-colors shrink-0 whitespace-nowrap">
             <TextScramble text="contact" />
           </a>
         </div>

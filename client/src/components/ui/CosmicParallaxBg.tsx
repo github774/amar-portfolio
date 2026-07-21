@@ -57,10 +57,11 @@ const CosmicParallaxBg: React.FC<CosmicParallaxBgProps> = ({
   };
   
   useEffect(() => {
-    // Generate star shadows when component mounts
-    setSmallStars(generateStarBoxShadow(300));
-    setMediumStars(generateStarBoxShadow(80));
-    setBigStars(generateStarBoxShadow(30));
+    // Generate star shadows when component mounts (optimized counts for mobile 60FPS performance)
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    setSmallStars(generateStarBoxShadow(isMobile ? 50 : 200));
+    setMediumStars(generateStarBoxShadow(isMobile ? 15 : 50));
+    setBigStars(generateStarBoxShadow(isMobile ? 8 : 20));
     
     // Set animation iteration based on loop prop
     document.documentElement.style.setProperty(
