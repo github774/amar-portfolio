@@ -193,6 +193,486 @@ const WORK_ITEMS = [
       "Identified critical overconfidence loops in instruction models"
     ],
   },
+  {
+    name: "AetherDB",
+    category: "Infra",
+    role: "Builder",
+    date: "2026",
+    description: "A distributed, serverless vector database written in Rust, optimized for real-time semantic search.",
+    longDescription: "AetherDB is a distributed, lock-free vector database engineered for real-time indexing of millions of embeddings. Built with Rust and Tokio, it implements a custom HNSW graph traversal algorithm with SIMD-accelerated distance metrics, leveraging raft consensus for multi-node partition tolerance.",
+    featured: false,
+    tags: ["Rust", "Vector DB", "SIMD", "Raft"],
+    link: "",
+    highlights: [
+      "Implemented SIMD-accelerated Cosine and L2 distance kernels in assembly/Rust",
+      "Designed a custom Raft-based replication layer for fault-tolerant clustering",
+      "Achieved 99.8% recall on 1M vectors with query latency under 1.4ms"
+    ]
+  },
+  {
+    name: "KubeFlow-Edge",
+    category: "Infra",
+    role: "Builder",
+    date: "2026",
+    description: "Lightweight container orchestration engine optimized for resource-constrained ARM devices.",
+    longDescription: "KubeFlow-Edge is a zero-config orchestration agent built to deploy, auto-scale, and monitor microservices on local IoT networks and edge devices. Features a custom lightweight virtual networking stack and a memory footprint under 15MB.",
+    featured: false,
+    tags: ["Go", "Orchestration", "Edge Computing", "IoT"],
+    link: "",
+    highlights: [
+      "Reduced memory consumption by 85% compared to vanilla K3s",
+      "Built a peer-to-peer gossip protocol for service discovery",
+      "Integrated automated hardware-accelerated model deployment on Nvidia Jetson"
+    ]
+  },
+  {
+    name: "TraceJS",
+    category: "Tools",
+    role: "Builder",
+    date: "2026",
+    description: "Zero-overhead execution tracing and performance profiling agent for Node.js microservices.",
+    longDescription: "TraceJS hooks into the Node.js V8 runtime using asynchronous hooks and native C++ bindings to generate real-time execution graphs. It maps CPU bottlenecks and memory leaks down to the exact line of JavaScript code with negligible CPU overhead.",
+    featured: false,
+    tags: ["Node.js", "V8 Engine", "TypeScript", "Performance"],
+    link: "",
+    highlights: [
+      "Maintained less than 1.5% CPU overhead under 100k requests/sec",
+      "Built dynamic memory leak detection using heap-snapshot diffing",
+      "Designed a real-time FlameGraph visualizer using WebGL"
+    ]
+  },
+  {
+    name: "HydraCompiler",
+    category: "Infra",
+    role: "Builder",
+    date: "2025",
+    description: "Optimizing Ahead-of-Time compiler targeting WebAssembly for a subset of TypeScript.",
+    longDescription: "HydraCompiler parses, analyzes, and compiles typed TypeScript subsets into highly optimized WebAssembly binary files. It implements advanced loop-vectorization, dead-code elimination, and scalar replacement to optimize math and graphics pipelines.",
+    featured: false,
+    tags: ["WASM", "Compilers", "TypeScript", "Algorithms"],
+    link: "",
+    highlights: [
+      "Created custom AST parser and semantic analyzer from scratch",
+      "Developed SSA-based optimization passes generating binary WASM",
+      "Outperformed baseline V8 JS compilation by up to 3.8x in canvas rendering tasks"
+    ]
+  },
+  {
+    name: "SimGrid",
+    category: "Simulation",
+    role: "Builder",
+    date: "2026",
+    description: "Large-scale grid simulator modeling power distribution networks under renewable energy stress.",
+    longDescription: "SimGrid is an agent-based simulation tool that models electrical grid stability when incorporating volatile solar and wind sources. Deploys thousands of consumer agents acting dynamically based on electricity price vectors and weather fluctuations.",
+    featured: false,
+    tags: ["Simulation", "Grid Stability", "Python", "Data Science"],
+    link: "",
+    highlights: [
+      "Models over 50,050 grid nodes and transformer loads in real-time",
+      "Simulates price elasticity using reinforcement learning consumer agents",
+      "Validated against public state grid failure datasets with 92% accuracy"
+    ]
+  },
+  {
+    name: "ChronosDB",
+    category: "Infra",
+    role: "Builder",
+    date: "2026",
+    description: "High-performance, memory-mapped time-series database optimized for IoT sensor telemetry.",
+    longDescription: "ChronosDB is a time-series database engine designed for ultra-fast writes and aggregated queries. It utilizes a custom log-structured merge-tree (LSM) design with memory-mapped files and double-delta compression on timestamps.",
+    featured: false,
+    tags: ["Database", "Time-Series", "C++", "Storage Engines"],
+    link: "",
+    highlights: [
+      "Sustained ingestion rates of over 2.4 million metrics/sec on single core",
+      "Implemented custom gorilla-compression algorithm for float values",
+      "Built an SQL-like query language with automatic bucket aggregations"
+    ]
+  },
+  {
+    name: "ByteVibe",
+    category: "Games & Hardware",
+    role: "Builder",
+    date: "2025",
+    description: "Tactile audio feedback belt translating frequency ranges into spatial haptic coordinates.",
+    longDescription: "ByteVibe is a wearable assistive hardware device that captures environmental audio, splits it into frequency bands using a hardware FFT chip, and drives a grid of haptic ERM motors to map sound space.",
+    featured: false,
+    tags: ["Hardware", "ESP32", "PCB Design", "Assistive Tech"],
+    link: "",
+    highlights: [
+      "Designed custom dual-layer PCB with embedded ESP32 microcontroller",
+      "Implemented low-latency audio processing loop with under 8ms delay",
+      "Tested with deaf participants to assist in spatial sound navigation"
+    ]
+  },
+  {
+    name: "DevSpace",
+    category: "Tools",
+    role: "Builder",
+    date: "2026",
+    description: "Collaborative cloud IDE sandbox environment running full-stack microservices inside WebContainers.",
+    longDescription: "DevSpace runs full-stack development setups directly in the browser. It leverages modern WebContainers and WebAssembly-compiled runtimes to run Node.js, Python, and local databases without server-side compute overhead.",
+    featured: false,
+    tags: ["WebContainers", "WASM", "Next.js", "Monaco Editor"],
+    link: "",
+    highlights: [
+      "Runs a full Node.js web server and sqlite database entirely in browser memory",
+      "Implements real-time workspace sync using Conflict-free Replicated Data Types (CRDTs)",
+      "Integrated custom monaco-editor with autocompletion and terminal emulation"
+    ]
+  },
+  {
+    name: "Loom",
+    category: "Infra",
+    role: "Builder",
+    date: "2026",
+    description: "Ultra-fast, zero-copy TCP load balancer and reverse proxy written in Zig.",
+    longDescription: "Loom is a high-throughput load balancer designed for sub-microsecond connection routing. Built on top of io_uring and Zig, it handles connection pooling, TLS termination, and path-based routing with zero memory allocations in the hot path.",
+    featured: false,
+    tags: ["Zig", "Networking", "Load Balancer", "Systems Programming"],
+    link: "",
+    highlights: [
+      "Achieved 1.2 million concurrent connections with minimal memory footprint",
+      "Implemented zero-allocation HTTP/1.1 and HTTP/2 parser",
+      "Reduced connection latency by 45% compared to baseline Nginx setups"
+    ]
+  },
+  {
+    name: "Apex",
+    category: "Games & Hardware",
+    role: "Builder",
+    date: "2026",
+    description: "Custom 32-bit RISC-V soft processor core synthesized on an FPGA, running a minimal RTOS.",
+    longDescription: "Apex is a single-issue, 5-stage pipelined RISC-V processor core designed in SystemVerilog. Synthesized on a Xilinx Artix-7 FPGA, it includes custom instruction extensions for matrix multiplications and boots a custom RTOS kernel.",
+    featured: false,
+    tags: ["RISC-V", "SystemVerilog", "FPGA", "RTOS"],
+    link: "",
+    highlights: [
+      "Designed a fully compliant RV32I instruction set architecture",
+      "Implemented hazard detection, forwarding units, and branch prediction",
+      "Successfully ran hardware matrix operations at 100MHz clock speed"
+    ]
+  },
+  {
+    name: "GigaGraph",
+    category: "Simulation",
+    role: "Builder",
+    date: "2025",
+    description: "Distributed graph simulation pipeline tracking viral misinformation across large social graphs.",
+    longDescription: "GigaGraph simulates the propagation of news stories across a synthetic social network of 5 million nodes. It incorporates demographic biases, network closeness, and confirmation bias to model polarization shifts over time.",
+    featured: false,
+    tags: ["Graph Simulation", "Apache Spark", "Big Data", "Social Graphs"],
+    link: "",
+    highlights: [
+      "Simulates millions of nodes and edges using Apache Spark GraphX",
+      "Models propagation using custom susceptible-infected-recovered (SIR) curves",
+      "Designed real-time graph visualization displaying active polarization clusters"
+    ]
+  },
+  {
+    name: "NeuroNet",
+    category: "AI/ML",
+    role: "Builder",
+    date: "2026",
+    description: "Lightweight, browser-native neural network library supporting training and inference with WebGL acceleration.",
+    longDescription: "NeuroNet is a zero-dependency JavaScript library for building and training neural networks directly in the browser. It compiles layers into custom WebGL fragment shaders, bypassing standard CPU bottlenecks for computer vision tasks.",
+    featured: false,
+    tags: ["WebGL", "Neural Networks", "Vanilla JS", "Computer Vision"],
+    link: "",
+    highlights: [
+      "Wrote custom GLSL shaders for matrix math and backpropagation",
+      "Implemented common layers: Conv2D, MaxPooling, Dense, and Dropout",
+      "Runs real-time MNIST training at 60 FPS in standard browser windows"
+    ]
+  },
+  {
+    name: "SyncFS",
+    category: "Tools",
+    role: "Builder",
+    date: "2026",
+    description: "Peer-to-peer file synchronization system utilizing content-addressable storage and local discovery.",
+    longDescription: "SyncFS is a cross-platform daemon that synchronizes folders across local and remote nodes without central servers. It partitions files into cryptographically hashed chunks and distributes them using a custom DHT.",
+    featured: false,
+    tags: ["P2P", "Distributed Systems", "Go", "IPFS"],
+    link: "",
+    highlights: [
+      "Implements content-defined chunking using Rabin fingerprints",
+      "Built a peer discovery engine using mDNS and UPnP hole punching",
+      "Achieved deduplication rates averaging 30% on code repositories"
+    ]
+  },
+  {
+    name: "Lexi",
+    category: "Tools",
+    role: "Builder",
+    date: "2025",
+    description: "High-performance code formatter supporting multiple languages with a unified syntax tree engine.",
+    longDescription: "Lexi is an extensible code formatter designed for speed and consistency. It uses a custom incremental parser that builds a concrete syntax tree, formatting files in-place with strict configuration guidelines.",
+    featured: false,
+    tags: ["Rust", "Compilers", "Formatter", "Lexer"],
+    link: "",
+    highlights: [
+      "Formatted files up to 25x faster than Prettier in large codebases",
+      "Maintains AST-level verification to guarantee zero semantic changes",
+      "Supports custom style rules using a declarative DSL"
+    ]
+  },
+  {
+    name: "HeliHacks",
+    category: "Hackathons",
+    role: "Lead Organizer",
+    date: "May 2025",
+    description: "200+ builder hackathon focused on sustainable and renewable tech projects.",
+    longDescription: "HeliHacks brought together students to build hardware and software projects solving local environmental issues. Managed logistics, designed the web platform, and built a custom automated project submission and grading system.",
+    featured: false,
+    tags: ["Leadership", "Branding", "Operations", "Sponsorships"],
+    link: "",
+    highlights: [
+      "Hosted over 200 students with zero runtime issues",
+      "Secured $8,000 in sponsor funding and hardware grants",
+      "Built an automated jury portal mapping scores and eliminating judge bias"
+    ]
+  },
+  {
+    name: "Volcano",
+    category: "AI/ML",
+    role: "Builder",
+    date: "2026",
+    description: "An open-source pipeline for local instruction-tuning of deep reasoning models.",
+    longDescription: "Volcano streamlines the process of fine-tuning small models on complex chain-of-thought datasets. It automates dataset synthesis, handles parameter-efficient fine-tuning (LoRA), and runs automatic evaluation benchmarks.",
+    featured: false,
+    tags: ["AI/ML", "Fine-Tuning", "Python", "Reasoning"],
+    link: "",
+    highlights: [
+      "Generated a custom 50,000-turn logic dataset using agent synthesis",
+      "Configured FP8 quantization pipelines for ultra-low VRAM training",
+      "Improved 7B model reasoning benchmarks by 18% on logic tasks"
+    ]
+  },
+  {
+    name: "Caster",
+    category: "Tools",
+    role: "Builder",
+    date: "2026",
+    description: "Distributed video streaming server with real-time transcoding and adaptive bitrate delivery.",
+    longDescription: "Caster is a streaming engine designed for low-latency live video. Written in Go, it ingests RTMP streams, performs hardware-accelerated transcoding to H.264/H.265, and delivers HLS streams with under 2s latency.",
+    featured: false,
+    tags: ["Go", "Video Streaming", "FFmpeg", "Transcoding"],
+    link: "",
+    highlights: [
+      "Engineered transcoding pipeline integrating FFmpeg native bindings",
+      "Implemented dynamic manifest generation for adaptive bitrate shifts",
+      "Sustained 500 concurrent transcoded streams on a single server instance"
+    ]
+  },
+  {
+    name: "EtherGate",
+    category: "Infra",
+    role: "Builder",
+    date: "2025",
+    description: "High-performance API gateway with rate-limiting, authentication, and telemetry compilation.",
+    longDescription: "EtherGate sits at the edge of microservice architectures, managing traffic routing and security. It implements token bucket rate-limiting, OAuth verification, and distributes logs via OpenTelemetry protocol.",
+    featured: false,
+    tags: ["Infra", "API Gateway", "Rust", "Redis"],
+    link: "",
+    highlights: [
+      "Handles over 80k requests per second with latency under 0.8ms",
+      "Built custom middleware engine using Lua/Redis configuration",
+      "Designed a real-time traffic visualization dashboard"
+    ]
+  },
+  {
+    name: "QuantFlow",
+    category: "AI/ML",
+    role: "Builder",
+    date: "2026",
+    description: "Automated quantization toolkit converting model weights into arbitrary 2-to-4-bit formats.",
+    longDescription: "QuantFlow is a model optimization framework designed to shrink LLMs for edge deployment. It implements advanced activation-aware quantization (AWQ) and GPTQ algorithms, producing optimized execution kernels.",
+    featured: false,
+    tags: ["AI/ML", "Quantization", "CUDA", "PyTorch"],
+    link: "",
+    highlights: [
+      "Quantized 13B models to 3-bit with negligible perplexity degradation",
+      "Wrote custom CUDA kernels for fast de-quantization during inference",
+      "Reduced GPU memory footprint of target models by 70%"
+    ]
+  },
+  {
+    name: "SecureTunnel",
+    category: "Infra",
+    role: "Builder",
+    date: "2026",
+    description: "End-to-end encrypted local port forwarding service using modern Noise Protocol.",
+    longDescription: "SecureTunnel exposes local development servers to the internet securely. It establishes a double-encrypted connection between local clients and cloud relays using WireGuard-style handshake protocols.",
+    featured: false,
+    tags: ["Networking", "Encryption", "Rust", "Relays"],
+    link: "",
+    highlights: [
+      "Built custom packet routing protocol over multiplexed TCP/UDP",
+      "Implemented automated Let's Encrypt SSL certificate provisioning",
+      "Handles connection recovery and failover within 120ms"
+    ]
+  },
+  {
+    name: "Spectra",
+    category: "Games & Hardware",
+    role: "Builder",
+    date: "2025",
+    description: "Gesture-controlled synth module using raw sensor readings from an ESP32 wearable glove.",
+    longDescription: "Spectra is a musical synthesizer that translates hand movements into pitch, filters, and modulation. A custom ESP32 glove sends IMU and flex sensor data via ESP-NOW to a desktop synthesizer backend.",
+    featured: false,
+    tags: ["Hardware", "ESP32", "Synthesizer", "C++"],
+    link: "",
+    highlights: [
+      "Engineered low-latency C++ firmware with Kalman filtering",
+      "Built FM synthesizer engine in Rust utilizing WebAudio API",
+      "Exhibited live at local maker fairs with high audience engagement"
+    ]
+  },
+  {
+    name: "WebPDF",
+    category: "Tools",
+    role: "Builder",
+    date: "2026",
+    description: "Client-side PDF rendering and document manipulation suite running inside a sandboxed iframe.",
+    longDescription: "WebPDF provides fast, secure document annotation and signing without uploading files to servers. Built entirely with vanilla JS and WebAssembly-compiled libraries, it operates 100% offline.",
+    featured: false,
+    tags: ["PDF", "WASM", "Vanilla JS", "Security"],
+    link: "",
+    highlights: [
+      "Performs document parsing and rendering in web workers to avoid UI lag",
+      "Implemented client-side cryptographic digital signature verification",
+      "Supports full vector editing and annotation overlays"
+    ]
+  },
+  {
+    name: "VoxelSim",
+    category: "Simulation",
+    role: "Builder",
+    date: "2026",
+    description: "Real-time physics engine simulating cellular automata and granular materials in 3D.",
+    longDescription: "VoxelSim is a GPU-accelerated sandbox simulator modeling fluid dynamics, gravity, and thermal transfers on a grid of up to 4 million voxels. Rendered using custom raymarching shaders.",
+    featured: false,
+    tags: ["Physics Simulation", "WebGL", "HLSL", "Raymarching"],
+    link: "",
+    highlights: [
+      "Wrote GPU compute shaders in HLSL/WebGL 2 for physics updates",
+      "Achieved stable 60 FPS simulations with 2 million active particles",
+      "Designed interactive user controls for custom material creation"
+    ]
+  },
+  {
+    name: "SmartQueue",
+    category: "Infra",
+    role: "Builder",
+    date: "2025",
+    description: "Message queue engine with prioritized delivery and guaranteed once-delivery semantics.",
+    longDescription: "SmartQueue is a high-availability message broker written in Go. It implements memory-mapped storage rings, active consumer health tracking, and custom delivery policy headers.",
+    featured: false,
+    tags: ["Go", "Message Queue", "Distributed Systems", "IPC"],
+    link: "",
+    highlights: [
+      "Handles throughput of 800k messages/sec with zero disk writes",
+      "Designed disk-backed fallback files for memory overflow scenarios",
+      "Supports cluster replication using custom gossip mechanisms"
+    ]
+  },
+  {
+    name: "OmniSearch",
+    category: "Tools",
+    role: "Builder",
+    date: "2026",
+    description: "Unified search agent indexing local files and database schemas with semantic embedding support.",
+    longDescription: "OmniSearch runs silently in the background, creating a unified index of your digital workspace. It embeds text snippets locally and matches user search prompts using a lightweight ONNX runtime.",
+    featured: false,
+    tags: ["Search", "AI/ML", "ONNX", "Local Indexing"],
+    link: "",
+    highlights: [
+      "Created a zero-dependency local crawler with background file watching",
+      "Performs semantic search queries under 12ms using cached indexes",
+      "Optimized local storage footprint to under 1% of index data size"
+    ]
+  },
+  {
+    name: "GameCraft",
+    category: "Games & Hardware",
+    role: "Builder",
+    date: "2025",
+    description: "A retro 8-bit game console framework running compiled bytecode inside a custom virtual machine.",
+    longDescription: "GameCraft is an educational game engine platform. It includes a custom assembler, a virtual machine running a proprietary instruction set, and a sprite-based graphics rendering engine.",
+    featured: false,
+    tags: ["Games", "VM", "Assembler", "Emulation"],
+    link: "",
+    highlights: [
+      "Designed a custom 16-bit instruction set with 16 registers",
+      "Built an assembler compiler translating assembly files to binaries",
+      "Implemented full audio synth chip emulation supporting 4 channels"
+    ]
+  },
+  {
+    name: "BioSim",
+    category: "Simulation",
+    role: "Builder",
+    date: "2026",
+    description: "Ecosystem simulator modeling genetic evolution and natural selection among digital organisms.",
+    longDescription: "BioSim is an artificial life simulation that spawns hundreds of neural-network-driven creature agents. Creatures mutate, learn to forage, avoid predators, and reproduce based on genetic fitness parameters.",
+    featured: false,
+    tags: ["AI/ML", "Genetic Algorithms", "Simulation", "Neural Nets"],
+    link: "",
+    highlights: [
+      "Creature behavior is controlled by feedforward networks trained via GA",
+      "Supports dynamic terrain generation and resources distribution",
+      "Allows real-time modification of mutation rates and physical constants"
+    ]
+  },
+  {
+    name: "LinkFlow",
+    category: "Tools",
+    role: "Builder",
+    date: "2026",
+    description: "Web scraping and workflow automation engine with visual graph node editing.",
+    longDescription: "LinkFlow allows developers to build complex scraping pipelines. It features a drag-and-drop node graph that maps browser tasks, text extraction, API calls, and data mapping into reproducible JSON pipelines.",
+    featured: false,
+    tags: ["Web Scraping", "Puppeteer", "React", "Node Editor"],
+    link: "",
+    highlights: [
+      "Built a custom visual node-editor utilizing React Flow",
+      "Integrated Puppeteer scripting with automated captcha solving",
+      "Exports visual flows directly into production-ready Go scripts"
+    ]
+  },
+  {
+    name: "BayHacks",
+    category: "Lead Organizer",
+    role: "Lead Organizer",
+    date: "October 2025",
+    description: "300+ attendee hackathon held in San Francisco, focused on open-source tool development.",
+    longDescription: "BayHacks gathered students from across the Bay Area for a weekend of open-source development. I oversaw sponsorship acquisition, designed the platform website, and managed the judging pipeline.",
+    featured: false,
+    tags: ["Leadership", "Branding", "Operations", "Sponsorships"],
+    link: "",
+    highlights: [
+      "Secured $15,005 in funding from premier tech sponsors",
+      "Coordinated the event schedule, logistics, and mentorship channels",
+      "Created open-source boilerplate repos for participants to bootstrap"
+    ]
+  },
+  {
+    name: "Solstice",
+    category: "Games & Hardware",
+    role: "Builder",
+    date: "2026",
+    description: "A retro-style 3D raycaster game engine built entirely in vanilla C++ without modern graphics APIs.",
+    longDescription: "Solstice is a software-rendered 3D engine inspired by Wolfenstein 3D. It calculates wall projections, texture mapping, and sprite rendering directly to a pixel buffer using custom mathematical calculations.",
+    featured: false,
+    tags: ["C++", "Raycasting", "Software Renderer", "Graphics"],
+    link: "",
+    highlights: [
+      "Implemented software-rendered raycasting and texture mapping",
+      "Built custom sound compiler converting MIDI files into audio buffers",
+      "Compiles to both native executables and WebAssembly for browser play"
+    ]
+  },
 ];
 
 const FILTERS = ["All", "AI/ML", "Simulation", "Tools", "Games & Hardware", "Infra", "Hackathons"];
@@ -717,6 +1197,7 @@ export default function Home() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [showWipe, setShowWipe] = useState(false);
   const [selectedProjectName, setSelectedProjectName] = useState<string>(WORK_ITEMS[0].name);
+  const [mobileDashboardView, setMobileDashboardView] = useState<"list" | "console">("list");
 
   useEffect(() => {
     setShowWipe(false);
@@ -904,18 +1385,18 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Centered Floating Pill Navigation */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-[#121214]/70 backdrop-blur-md border border-neutral-800/60 rounded-full px-6 py-2 flex items-center gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
-        <a href="#" className="font-serif font-bold text-lg text-white hover:opacity-85 transition-opacity">
+      <nav className="fixed top-3 sm:top-6 left-1/2 -translate-x-1/2 z-50 bg-[#121214]/80 backdrop-blur-md border border-neutral-800/60 rounded-full px-4 sm:px-6 py-2 flex items-center gap-4 sm:gap-8 shadow-[0_8px_30px_rgb(0,0,0,0.5)] max-w-[94vw] justify-between">
+        <a href="#" className="font-serif font-bold text-base sm:text-lg text-white hover:opacity-85 transition-opacity shrink-0">
           Amar
         </a>
-        <div className="flex items-center gap-6">
-          <a href="#work" className="text-xs md:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
+        <div className="flex items-center gap-3 sm:gap-6">
+          <a href="#work" className="text-xs sm:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
             <TextScramble text="work" />
           </a>
-          <a href="#about" className="text-xs md:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
+          <a href="#about" className="text-xs sm:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
             <TextScramble text="about" />
           </a>
-          <a href="#contact" className="text-xs md:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
+          <a href="#contact" className="text-xs sm:text-sm font-mono text-zinc-400 hover:text-white transition-colors">
             <TextScramble text="contact" />
           </a>
         </div>
@@ -1036,17 +1517,42 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Mobile View Toggle (visible only on small screens < lg) */}
+            <div className="lg:hidden flex border border-zinc-800 bg-zinc-950/90 rounded-lg p-1 mb-4 gap-1">
+              <button
+                onClick={() => setMobileDashboardView("list")}
+                className={`flex-1 py-1.5 text-center text-xs font-mono rounded transition-colors cursor-pointer ${
+                  mobileDashboardView === "list" ? "bg-white text-black font-bold" : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                Projects List ({filteredItems.length})
+              </button>
+              <button
+                onClick={() => setMobileDashboardView("console")}
+                className={`flex-1 py-1.5 text-center text-xs font-mono rounded transition-colors cursor-pointer ${
+                  mobileDashboardView === "console" ? "bg-white text-black font-bold" : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                Console ({currentProject.name})
+              </button>
+            </div>
+
             {/* Main two-column dashboard structure */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100%-80px)] mt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100%-80px)] mt-2 sm:mt-4">
               {/* Left Sidebar: Projects List (5 cols) */}
-              <div className="lg:col-span-5 flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar max-h-[300px] lg:max-h-full">
+              <div className={`lg:col-span-5 flex-col gap-3 overflow-y-auto pr-1 sm:pr-2 custom-scrollbar max-h-[420px] lg:max-h-full ${
+                mobileDashboardView === "list" ? "flex" : "hidden lg:flex"
+              }`}>
                 {filteredItems.map((item) => {
                   const isSelected = item.name === selectedProjectName;
                   return (
                     <div
                       key={item.name}
-                      onClick={() => setSelectedProjectName(item.name)}
-                      className={`p-4 rounded-xl border text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${
+                      onClick={() => {
+                        setSelectedProjectName(item.name);
+                        setMobileDashboardView("console");
+                      }}
+                      className={`p-3.5 sm:p-4 rounded-xl border text-left cursor-pointer transition-all duration-200 hover:translate-x-1 ${
                         isSelected
                           ? "bg-zinc-900/60 border-white shadow-md shadow-white/5"
                           : "bg-zinc-950/40 border-zinc-800/80 hover:border-zinc-700/80"
@@ -1076,25 +1582,27 @@ export default function Home() {
               </div>
 
               {/* Right Panel: Project Control Center Console (7 cols) */}
-              <div className="lg:col-span-7 flex flex-col bg-zinc-950/65 border border-zinc-800/80 rounded-2xl overflow-hidden h-full max-h-[500px] lg:max-h-full shadow-2xl relative">
+              <div className={`lg:col-span-7 flex-col bg-zinc-950/65 border border-zinc-800/80 rounded-2xl overflow-hidden h-full min-h-[380px] lg:max-h-full shadow-2xl relative ${
+                mobileDashboardView === "console" ? "flex" : "hidden lg:flex"
+              }`}>
                 {/* macOS Terminal style bar */}
-                <div className="bg-[#161619]/80 backdrop-blur border-b border-zinc-800/80 px-4 py-3 flex items-center justify-between">
+                <div className="bg-[#161619]/80 backdrop-blur border-b border-zinc-800/80 px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#ff5f56]" />
                     <span className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
                     <span className="w-2 h-2 rounded-full bg-[#27c93f]" />
                   </div>
-                  <div className="text-[9px] font-mono text-zinc-500">
+                  <div className="text-[9px] font-mono text-zinc-500 truncate max-w-[200px] sm:max-w-none">
                     bash - amars@foothill:~/projects/{currentProject.name.toLowerCase().replace(/@\w+\//g, "")}
                   </div>
-                  <div className="w-8" />
+                  <div className="w-4 sm:w-8" />
                 </div>
 
                 {/* Console content */}
-                <div className="p-5 overflow-y-auto h-[calc(100%-36px)] flex flex-col justify-between gap-5 text-left custom-scrollbar">
+                <div className="p-3.5 sm:p-5 overflow-y-auto h-[calc(100%-36px)] flex flex-col justify-between gap-4 sm:gap-5 text-left custom-scrollbar">
                   <div className="space-y-3">
-                    <div className="flex flex-wrap items-center justify-between gap-4">
-                      <h3 className="text-lg font-serif text-white font-bold">
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <h3 className="text-base sm:text-lg font-serif text-white font-bold">
                         {currentProject.name}
                       </h3>
                       <div className="flex gap-2">
@@ -1124,7 +1632,7 @@ export default function Home() {
                       {currentProject.longDescription}
                     </p>
 
-                    <div className="flex flex-wrap items-center gap-4 text-[9px] font-mono text-zinc-500 pt-2 border-t border-zinc-900">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[9px] font-mono text-zinc-500 pt-2 border-t border-zinc-900">
                       <span>ROLE: {currentProject.role.toUpperCase()}</span>
                       <span className="w-1 h-1 bg-zinc-800 rounded-full" />
                       <span>CAT: {currentProject.category.toUpperCase()}</span>
@@ -1134,7 +1642,7 @@ export default function Home() {
                   </div>
 
                   {/* Sandbox playground panel */}
-                  <div className="flex-1 min-h-[160px] border border-zinc-900 bg-zinc-950 p-3.5 rounded-xl flex flex-col justify-between">
+                  <div className="flex-1 min-h-[150px] border border-zinc-900 bg-zinc-950 p-3 sm:p-3.5 rounded-xl flex flex-col justify-between">
                     <ProjectSandbox project={currentProject} />
                   </div>
 
@@ -1201,14 +1709,14 @@ export default function Home() {
         </div>
 
         {/* Corner frame visual accents */}
-        <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-white/20 z-10 pointer-events-none"></div>
-        <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-white/20 z-10 pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-white/20 z-10 pointer-events-none"></div>
-        <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-white/20 z-10 pointer-events-none"></div>
+        <div className="hidden sm:block absolute top-0 left-0 w-8 h-8 sm:w-12 sm:h-12 border-t-2 border-l-2 border-white/20 z-10 pointer-events-none"></div>
+        <div className="hidden sm:block absolute top-0 right-0 w-8 h-8 sm:w-12 sm:h-12 border-t-2 border-r-2 border-white/20 z-10 pointer-events-none"></div>
+        <div className="hidden sm:block absolute bottom-0 left-0 w-8 h-8 sm:w-12 sm:h-12 border-b-2 border-l-2 border-white/20 z-10 pointer-events-none"></div>
+        <div className="hidden sm:block absolute bottom-0 right-0 w-8 h-8 sm:w-12 sm:h-12 border-b-2 border-r-2 border-white/20 z-10 pointer-events-none"></div>
 
         {/* Terminal credentials panel */}
-        <div className="container relative z-10 flex items-center justify-end w-full">
-          <div className="w-full lg:w-1/2 max-w-xl bg-black/60 backdrop-blur-md border border-zinc-800 p-8 rounded-2xl relative shadow-2xl">
+        <div className="container relative z-10 flex items-center justify-end w-full px-4 sm:px-6">
+          <div className="w-full lg:w-1/2 max-w-xl bg-black/60 backdrop-blur-md border border-zinc-800 p-5 sm:p-8 rounded-2xl relative shadow-2xl">
             {/* Top decor line */}
             <div className="flex items-center gap-2 mb-4 opacity-50">
               <div className="w-8 h-px bg-white"></div>
@@ -1217,9 +1725,9 @@ export default function Home() {
             </div>
 
             {/* Header with dither accent */}
-            <div className="relative mb-6">
+            <div className="relative mb-4 sm:mb-6">
               <div className="hidden lg:block absolute -right-3 top-0 bottom-0 w-1 dither-pattern opacity-30"></div>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-white leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white leading-tight">
                 About Me
               </h2>
             </div>
@@ -1232,7 +1740,7 @@ export default function Home() {
             </div>
 
             {/* Main credentials text */}
-            <div className="space-y-4 font-sans text-sm md:text-base text-zinc-300 leading-relaxed">
+            <div className="space-y-3 sm:space-y-4 font-sans text-xs sm:text-sm md:text-base text-zinc-300 leading-relaxed">
               <p>
                 I'm a sophomore at Foothill High School in Pleasanton, CA. I spend my time engineering software, building robots, and organizing student technical initiatives.
               </p>
@@ -1248,7 +1756,7 @@ export default function Home() {
             </div>
 
             {/* Bottom technical protocols */}
-            <div className="flex items-center gap-2 mt-8 opacity-45">
+            <div className="flex items-center gap-2 mt-6 sm:mt-8 opacity-45">
               <span className="text-white text-[8px] font-mono">∞</span>
               <div className="flex-1 h-px bg-zinc-700"></div>
               <span className="text-zinc-500 text-[8px] font-mono">CORE_PROTOCOL.ACTIVE</span>
@@ -1258,7 +1766,7 @@ export default function Home() {
 
         {/* Bottom system logs */}
         <div className="absolute left-0 right-0 bottom-0 z-10 bg-gradient-to-t from-white/[0.02] to-transparent">
-          <div className="container mx-auto py-3 flex items-center justify-between">
+          <div className="container mx-auto py-3 flex items-center justify-between px-4 sm:px-6">
             <div className="flex items-center gap-6 text-[8px] md:text-[9px] font-mono text-white/40">
               <span>SYSTEM.ACTIVE</span>
               <div className="hidden md:flex gap-1">
@@ -1283,24 +1791,24 @@ export default function Home() {
 
 
 
-      <section id="contact" className="py-24 relative bg-[#09090b] overflow-hidden min-h-[500px]">
+      <section id="contact" className="py-16 sm:py-24 relative bg-[#09090b] overflow-hidden min-h-[450px] sm:min-h-[500px]">
         <CosmicParallaxBg head="" text="" loop={true}>
-          <div className="container relative z-20 flex items-center justify-center h-full">
-            <div className="max-w-3xl mx-auto text-center space-y-12">
-              <div className="space-y-4">
-                <h2 className="text-sm font-mono uppercase tracking-widest text-zinc-500">
+          <div className="container relative z-20 flex items-center justify-center h-full px-4 sm:px-6">
+            <div className="max-w-3xl mx-auto text-center space-y-8 sm:space-y-12">
+              <div className="space-y-3 sm:space-y-4">
+                <h2 className="text-xs sm:text-sm font-mono uppercase tracking-widest text-zinc-500">
                   Connection
                 </h2>
                 {/* Text Effect #2: image mask heading */}
-                <p className="m-0 text-transparent text-5xl sm:text-7xl font-serif font-bold uppercase animate-text bg-[url('https://plus.unsplash.com/premium_photo-1661963874418-df1110ee39c1?w=900&auto=format&fit=crop&q=60')] bg-contain bg-clip-text opacity-95 tracking-wide text-center">
+                <p className="m-0 text-transparent text-4xl sm:text-6xl md:text-7xl font-serif font-bold uppercase animate-text bg-[url('https://plus.unsplash.com/premium_photo-1661963874418-df1110ee39c1?w=900&auto=format&fit=crop&q=60')] bg-contain bg-clip-text opacity-95 tracking-wide text-center">
                   Connect
                 </p>
-                <p className="text-zinc-400 text-base max-w-lg mx-auto font-sans">
+                <p className="text-zinc-400 text-sm sm:text-base max-w-lg mx-auto font-sans">
                   Hacking constantly. Reach out if you'd like to build together.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-md sm:max-w-none mx-auto pointer-events-auto">
                 <motion.a
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.98 }}
@@ -1317,7 +1825,7 @@ export default function Home() {
                       toast.success("Opening email client...");
                     }
                   }}
-                  className="bg-[#121214]/80 backdrop-blur border border-zinc-800 hover:border-zinc-600 rounded-full px-6 py-4 flex items-center justify-center gap-3 transition-colors text-white cursor-pointer"
+                  className="bg-[#121214]/80 backdrop-blur border border-zinc-800 hover:border-zinc-600 rounded-full px-5 py-3.5 sm:px-6 sm:py-4 flex items-center justify-center gap-3 transition-colors text-white cursor-pointer w-full sm:w-auto"
                 >
                   <Mail className="w-5 h-5 text-zinc-400" />
                   <span className="font-semibold text-sm">Email Me</span>
@@ -1328,7 +1836,7 @@ export default function Home() {
                   href="https://github.com/github774"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#121214]/80 backdrop-blur border border-zinc-800 hover:border-zinc-600 rounded-full px-6 py-4 flex items-center justify-center gap-3 transition-colors text-white"
+                  className="bg-[#121214]/80 backdrop-blur border border-zinc-800 hover:border-zinc-600 rounded-full px-5 py-3.5 sm:px-6 sm:py-4 flex items-center justify-center gap-3 transition-colors text-white w-full sm:w-auto"
                 >
                   <Github className="w-5 h-5 text-zinc-400" />
                   <span className="font-semibold text-sm">GitHub</span>
@@ -1339,7 +1847,7 @@ export default function Home() {
                   href="https://www.linkedin.com/in/amar-sakthi-1423483b7/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#121214]/80 backdrop-blur border border-zinc-800 hover:border-zinc-600 rounded-full px-6 py-4 flex items-center justify-center gap-3 transition-colors text-white"
+                  className="bg-[#121214]/80 backdrop-blur border border-zinc-800 hover:border-zinc-600 rounded-full px-5 py-3.5 sm:px-6 sm:py-4 flex items-center justify-center gap-3 transition-colors text-white w-full sm:w-auto"
                 >
                   <Linkedin className="w-5 h-5 text-zinc-400" />
                   <span className="font-semibold text-sm">LinkedIn</span>
